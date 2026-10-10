@@ -139,6 +139,20 @@ export const paperSizes: Record<number, Record<string, number>>  = {
         width: 148.0,
         height: 210.0,
     },
+    // Paper size: 6x4 inches horizontal (postcard)
+    6: {
+        width: 152.4,
+        height: 101.6,
+    },
+}
+
+// Human-readable labels for each paper size
+export const paperSizeLabels: Record<number, string> = {
+    2: "A2",
+    3: "A3",
+    4: "A4",
+    5: "A5",
+    6: "6×4in",
 }
 
 
@@ -147,26 +161,20 @@ export const paperSizes: Record<number, Record<string, number>>  = {
 export function initialzeCanvasSize(): CanvasSize {
     let canvasSize = {
         "gui_canvasSize": undefined,
-        "paperSize": 4,
+        "paperSize": 6,
 
-        "widthMargin": 30,
-        "cols": 2,
-        // A4 paper width - margin in pixels.
-        // * 30 is a width buffer to make the plot fit in
-        // a row together with other plots seperated by a gap
-        // * 2 is the number of columns
-        "width": (paperSizes[4]["width"] - 30) / 2 * PX,
+        "widthMargin": 0,
+        "cols": 1,
+        // 6x4in postcard: full width, single column
+        "width": paperSizes[6]["width"] * PX,
         "width_max": 10000,
         "width_min": 100,
         "width_step": 1,
 
-        "rows": 3,
-        "heightMargin": 50,
-        // A4 paper height - margin in pixels
-        // * 50 is a height buffer to make the plot fit in
-        // a column together with other plots seperated by a gap
-        // * 3 is the number of rows
-        "height": (paperSizes[4]["height"] - 50) / 3 * PX,
+        "rows": 1,
+        "heightMargin": 0,
+        // 6x4in postcard: full height, single row
+        "height": paperSizes[6]["height"] * PX,
         "height_max": 10000,
         "height_min": 100,
         "height_step": 1,
@@ -234,10 +242,10 @@ export function initialzeLineParameters(): LineParameters {
         "randomSeed": 1234,
 
         "gui_lineWidth": undefined,
-        "lineWidth_max": 1.00,
+        "lineWidth_max": 2.00,
         "lineWidth_min":  0.005,
         "lineWidth_step": 0.001,
-        "lineWidth": 0.20,
+        "lineWidth": 0.50,
 
         "gui_terrainSize": undefined,
         "terrainSize": 512,

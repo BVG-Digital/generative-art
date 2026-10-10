@@ -97,9 +97,10 @@ export default class View {
         this.f3 = this.gui.addFolder("Utils");
 
         // Folder f1: Paper and canvas size options
-        let paperSizes: Record<number, number> = {}
+        let paperSizes: Record<string, number> = {}
         for (let key in UTIL.paperSizes) {
-            paperSizes["A" + key] = key;
+            const label = UTIL.paperSizeLabels[Number(key)] ?? ("A" + key);
+            paperSizes[label] = Number(key);
         }
         this.canvasSize.gui_canvasSize = this.f1.add(
             this.canvasSize, "paperSize",
